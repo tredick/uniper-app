@@ -16,7 +16,8 @@ public class Person implements IMensch  {
 	
 	public Person() {
 		name = "";
-		strasse = "";					
+		strasse = "";
+		stadt = "";
 	}
 	
 	public  Person(String pName, String strasse ) {
