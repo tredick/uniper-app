@@ -17,6 +17,7 @@ public class Wasserwerk implements IMensch {
 	public void setStrasse(String strasse) {
 		this.strasse = strasse;
 	}
+
 	@Override
 	public String getNameAndStreet() {
 		return "Wasserwerk : "+name+" "+strasse; 
