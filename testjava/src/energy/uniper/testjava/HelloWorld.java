@@ -6,7 +6,7 @@ package energy.uniper.testjava;
 import java.util.ArrayList;
 
 /**
- * @author T17417
+ * @author T25551
  *
  */
 public class HelloWorld {
