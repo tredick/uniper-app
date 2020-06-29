@@ -3,7 +3,7 @@ package energy.uniper.testjava;
 
 
 
-public class Person implements IMensch  {
+public class Person implements IMensch,ISerializable  {
 		
 	private String name;
 	private String strasse;
@@ -31,6 +31,29 @@ public class Person implements IMensch  {
 	}	
 	
 	
+	public String toCsv() {
+		return name+","+strasse+","+stadt;
+	}
+	
+	
+	public boolean fromCsv(String pLine) {
+		
+		// Zur Sicherheit
+		if ( pLine == null || pLine.strip().length() == 0 ) {
+			this.setName( null );
+			this.setStrasse(null );
+			this.setStadt(null );
+			
+			return false;
+		}
+		
+		String[] parts = pLine.split(",");
+		this.setName(parts[0]);
+		this.setStrasse(parts[1]);
+		this.setStadt(parts[2]);
+		
+		return true;
+	}
 		
 	public String toString() {
 		StringBuffer buf = new StringBuffer();
@@ -102,6 +125,7 @@ public class Person implements IMensch  {
 	@Override
 	public String getNameAndStreet() {
 		return "Person : "+name+" "+strasse;
-	}  
+	}
+
 
 }
