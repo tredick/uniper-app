@@ -3,16 +3,73 @@
  */
 package energy.uniper.testjava;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
+
+import energy.uniper.testjava.db.StudentController;
 
 /**
  * @author T17417
  *
  */
 public class HelloWorld {
+	
+	
+	
+	   public void storeStudents() {
+         StudentController c = new StudentController();
+         
+         Student stud = new Student("Gunther","Hundegasse 12","9374563847");
+         stud.setStadt("Entenhausen");
+         stud.setPlz(41687);
+		   
+         try {
+			c.storeStudent( stud );
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	   }
+	
+	
+	   public void loadStudents() {
+		   
+         StudentController c = new StudentController();
+         
+         Student stud = new Student("Daisy","Hundegasse 9","9374563846");
+         stud.setStadt("Entenhausen");
+         stud.setPlz(41687);
+                  
+         
+         try {
+			List<Student> list = c.getAllStudents();
+			
+			System.out.println( "Students:" );
+			for ( Student s : list) {
+				System.out.println( s );
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	   }
 
+	   
+	   
+	   
+	   
 	   public static void main(String[] args){
 		   
+		   
+		 HelloWorld app = new HelloWorld();
+		 app.loadStudents();
+		 
+		 if ( true )
+		   return;
+		 
+		 
          // HelloWorld app = new HelloWorld ();
 	     // app.helloWorld( args );
 		   		 

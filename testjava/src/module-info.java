@@ -6,4 +6,5 @@
  *
  */
 module energy.uniper.testjava {
+	requires java.sql;
 }

@@ -5,34 +5,38 @@ package energy.uniper.testjava;
 
 public class Person implements IMensch,ISerializable  {
 		
-	private String name;
-	private String strasse;
+	private String myName;
+	private String myStrasse;
 	private int myHausnummer;
-	private long plz;
-	private String stadt;
+	private long myPlz;
+	private String myStadt;
 	
 	
 	
 	
 	public Person() {
-		name = "";
-		strasse = "";
-		stadt = "";
+		myName = "";
+		myStrasse = "";
+		myStadt = "";
 	}
 	
 	public  Person(String pName, String strasse ) {
-		name = pName;
-		this.strasse = strasse;			
+		myName = pName;
+		myStrasse = strasse;			
 	}
-	public  Person(String pName, String pStrasse,int pHausnummer ) {
-		name = pName;
-		strasse = pStrasse;			
+
+	public  Person(String pName, String pStrasse,int pHausnummer,long pPlz,String pStadt ) {
+		myName = pName;
+		myStrasse = pStrasse;			
 		myHausnummer = pHausnummer;
+		myPlz = pPlz;
+		
 	}	
 	
 	
+	
 	public String toCsv() {
-		return name+","+strasse+","+stadt;
+		return myName+","+myStrasse+","+myStadt;
 	}
 	
 	
@@ -58,8 +62,8 @@ public class Person implements IMensch,ISerializable  {
 	public String toString() {
 		StringBuffer buf = new StringBuffer();
 		
-		buf.append("name    : "+name+"\r\n" );
-		buf.append("strasse : "+strasse+"\r\n" );
+		buf.append("name    : "+myName+"\r\n" );
+		buf.append("strasse : "+myStrasse+"\r\n" );
 		
 		return buf.toString();
 	}
@@ -76,22 +80,22 @@ public class Person implements IMensch,ISerializable  {
 	
 	
 	public String getName() {
-		return name;
+		return myName;
 	}
 	public void setName(String pName) {
 		
 		if ( pName != null ) {
-		  name = pName;
+		  myName = pName;
 		}
 		
 	}
 
 	public String getStrasse() {
-		return strasse;
+		return myStrasse;
 	}
 
 	public void setStrasse(String strasse) {
-		this.strasse = strasse;
+		myStrasse = strasse;
 	}
 
 	public int getHausnummer() {
@@ -107,24 +111,24 @@ public class Person implements IMensch,ISerializable  {
 	}
 
 	public long getPlz() {
-		return plz;
+		return myPlz;
 	}
 
 	public void setPlz(long plz) {
-		this.plz = plz;
+		myPlz = plz;
 	}
 
 	public String getStadt() {
-		return stadt;
+		return myStadt;
 	}
 
 	public void setStadt(String stadt) {
-		this.stadt = stadt;
+		myStadt = stadt;
 	}
 
 	@Override
 	public String getNameAndStreet() {
-		return "Person : "+name+" "+strasse;
+		return "Person : "+myName+" "+myStrasse;
 	}
 
 
