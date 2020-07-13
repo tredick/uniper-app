@@ -20,7 +20,7 @@ public class HelloWorld {
 	   public void storeStudents() {
          StudentController c = new StudentController();
          
-         Student stud = new Student("Gunther","Hundegasse 12","9374563847");
+         Student stud = new Student("Gunther","Hundegasse",12,12674,"Entenhausen","9374563847");
          stud.setStadt("Entenhausen");
          stud.setPlz(41687);
 		   
@@ -37,7 +37,7 @@ public class HelloWorld {
 		   
          StudentController c = new StudentController();
          
-         Student stud = new Student("Daisy","Hundegasse 9","9374563846");
+         Student stud = new Student("Daisy","Hundegasse",12,12674,"Entenhausen","9374563849");
          stud.setStadt("Entenhausen");
          stud.setPlz(41687);
                   
@@ -77,7 +77,7 @@ public class HelloWorld {
 	     
 	     Person a = new Person("Donald Duck","Entenweg 5");	     	    
 	     Person b = new Person("Mickey Mouse","Mäuseallee 28");	     
-	     Student c = new Student("Goofy","Hundegasse 9","9374563845");
+	     Student c = new Student("Goofy","Hundegasse",9,53487,"Entenhausen","9374563845");
 	     Lehrer  d = new Lehrer("Daisy Duck","Entenweg 7","Deutsch, Mathe");
 	     
 	     Wasserwerk e = new Wasserwerk();

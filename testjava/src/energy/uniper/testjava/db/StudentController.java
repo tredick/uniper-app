@@ -87,10 +87,12 @@ public class StudentController {
 			while( rs.next() ) {
 				
 				// new Student object requires only name, strasse and matrikelnummer in constructor 
-				stud = new Student( rs.getString("name"),rs.getString("strasse"),rs.getString("matrikelnummer") );
-				stud.setHausnummer( rs.getInt("hausnummer") );
-				stud.setPlz( rs.getLong("plz") );
-				stud.setStadt( rs.getString("stadt") );
+				stud = new Student( rs.getString("name"),
+						           rs.getString("strasse"),
+						           rs.getInt("hausnummer"),
+						           rs.getLong("plz"),
+						           rs.getString("stadt"),
+						           rs.getString("matrikelnummer") );
 
 				// now add this student object to our list to return later 
 				retList.add( stud ); 
