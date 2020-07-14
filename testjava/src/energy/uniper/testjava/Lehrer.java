@@ -18,9 +18,11 @@ public class Lehrer extends Person {
 	public void setFaecher(String myFaecher) {
 		this.myFaecher = myFaecher;
 	}
-	
-	
-    public String toString() {	
-		return super.toString() + "faecher :"+myFaecher+"\r\n";		
+
+	@Override
+	public String toString() {
+		return super.toString()+", myFaecher=" + myFaecher;
 	}
+	
+	
 }

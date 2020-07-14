@@ -14,6 +14,12 @@ public class Person implements IMensch,ISerializable  {
 	
 	
 	
+	@Override
+	public String toString() {
+		return "myName=" + myName + ", myStrasse=" + myStrasse + ", myHausnummer=" + myHausnummer + ", myPlz="
+				+ myPlz + ", myStadt=" + myStadt;
+	}
+
 	public Person() {
 		myName = "";
 		myStrasse = "";
@@ -30,52 +36,10 @@ public class Person implements IMensch,ISerializable  {
 		myStrasse = pStrasse;			
 		myHausnummer = pHausnummer;
 		myPlz = pPlz;
+		myStadt = pStadt;
 		
 	}	
 	
-	
-	
-	public String toCsv() {
-		return myName+","+myStrasse+","+myStadt;
-	}
-	
-	
-	public boolean fromCsv(String pLine) {
-		
-		// Zur Sicherheit
-		if ( pLine == null || pLine.strip().length() == 0 ) {
-			this.setName( null );
-			this.setStrasse(null );
-			this.setStadt(null );
-			
-			return false;
-		}
-		
-		String[] parts = pLine.split(",");
-		this.setName(parts[0]);
-		this.setStrasse(parts[1]);
-		this.setStadt(parts[2]);
-		
-		return true;
-	}
-		
-	public String toString() {
-		StringBuffer buf = new StringBuffer();
-		
-		buf.append("name    : "+myName+"\r\n" );
-		buf.append("strasse : "+myStrasse+"\r\n" );
-		
-		return buf.toString();
-	}
-	
-	public void store() { 
-	
-	}
-	
-	
-	public void load() {
-		
-	}
 	
 	
 	
@@ -129,6 +93,18 @@ public class Person implements IMensch,ISerializable  {
 	@Override
 	public String getNameAndStreet() {
 		return "Person : "+myName+" "+myStrasse;
+	}
+
+	@Override
+	public boolean fromCsv(String pLine) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public String toCsv() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

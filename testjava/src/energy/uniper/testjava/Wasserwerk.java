@@ -22,6 +22,12 @@ public class Wasserwerk implements IMensch {
 	public String getNameAndStreet() {
 		return "Wasserwerk : "+name+" "+strasse; 
 	}
+	@Override
+	public String toString() {
+		return super.toString()+", name=" + name + ", strasse=" + strasse;
+	}
+	
+	
 	
 	
 }

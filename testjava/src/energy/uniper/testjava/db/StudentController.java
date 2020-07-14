@@ -11,75 +11,103 @@ import java.util.List;
 
 import energy.uniper.testjava.Student;
 
-public class StudentController {
+public class StudentController extends BasicDbController 
+{
+
+	public StudentController() {
+		super(null);
+	}
 
 	
-	
-	private Connection getConnection() throws SQLException {
-		String driverClass = "oracle.jdbc.driver.OracleDriver";
-		String jdbcurl = "jdbc:oracle:thin:@(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 10.55.2.100)(PORT = 1521))  (CONNECT_DATA = (SERVER = DEDICATED) (SERVICE_NAME = ULERP) ) )";
-		String user = "TABLEAU_USER";
-		String pass = "9q-zYSv3aHmGThLoaHbq";
-		
-		try {
-			Class.forName( driverClass );
-		} catch (ClassNotFoundException e) {
-			System.err.println("Error : couldn't find driver class "+driverClass);
-			return null;
-		}
-        
-        Connection connection = null;
-        if ( user != null && pass != null )        
-        	connection = DriverManager.getConnection(jdbcurl, user, pass);
-        else
-            connection = DriverManager.getConnection(jdbcurl);
-                       
-        return connection;		
+	public StudentController(Connection pConnection) {
+		super(pConnection);
 	}
+
 	
-	
-	
-	
-	
-	
-	public boolean storeStudent( Student pStudent ) throws SQLException {
-		if ( pStudent == null )
-			return false;
+	/**
+	 * This version of storeStudent allows to reuse a connection being opened somewhere else 
+	 * @param pConnection
+	 * @param pStudent
+	 * @return true in case of success
+	 * @throws SQLException
+	 */
+	public boolean storeStudent( Connection pConnection, Student pStudent )  {
 		
-		Connection con = this.getConnection();
+		boolean ok = false;
 		
-		if ( con == null )
+		try { 
+			if ( pStudent == null )
+				return false;
+					
+			if ( pConnection == null )
+				return false;
+					
+			String sql = "INSERT INTO SB_BAU.tj_student (matrikelnummer,name,strasse,hausnummer,plz,stadt) " +
+	                     "VALUES (?,?,?,?,?,?)";
+			
+			PreparedStatement stmt = pConnection.prepareStatement(sql);
+			
+			stmt.setString(1, pStudent.getMatrikelNummer());
+			stmt.setString(2, pStudent.getName());
+			stmt.setString(3, pStudent.getStrasse());
+			stmt.setInt(4, pStudent.getHausnummer());
+			stmt.setLong(5, pStudent.getPlz());
+			stmt.setString(6, pStudent.getStadt());
+			
+			stmt.execute();
+			
+			ok = true;
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
 			return false;
+		}
 				
-		String sql = "INSERT INTO SB_BAU.tj_student (matrikelnummer,name,strasse,hausnummer,plz,stadt) " +
-                     "VALUES (?,?,?,?,?,?)";
-		
-		PreparedStatement stmt = con.prepareStatement(sql);
-		
-		stmt.setString(1, pStudent.getMatrikelNummer());
-		stmt.setString(2, pStudent.getName());
-		stmt.setString(3, pStudent.getStrasse());
-		stmt.setInt(4, pStudent.getHausnummer());
-		stmt.setLong(5, pStudent.getPlz());
-		stmt.setString(6, pStudent.getStadt());
-		
-		boolean ok = stmt.execute();		
-		
-		con.close();
-		
 		return ok;
 	}
 	
+
+	/**
+	 * StoreStudent using the member connection variable
+	 * @param pStudent
+	 * @return
+	 * @throws SQLException
+	 */
+	public boolean storeStudent( Student pStudent )  {
+		
+		return storeStudent( myConnection, pStudent);
+		
+	}
 	
-	public List<Student> getAllStudents( ) throws SQLException {
+	
+	
+	/**
+	 * This version uses the connection stored in the member variable myConnection
+	 * @return
+	 * @throws SQLException
+	 */
+	public List<Student> getAllStudents() throws SQLException {
+		return getAllStudents( myConnection );
+	}
+		
+	
+	/**
+	 * Get all students in the DB
+	 * @return
+	 * @throws SQLException
+	 */
+	public List<Student> getAllStudents( Connection pConnection ) throws SQLException {
 		
 		ArrayList<Student> retList = new ArrayList<Student>();
+		
+		// no connection ? Then return an empty list
+		if ( pConnection == null )
+			return retList;
 				
-		Connection con = this.getConnection();
-		if ( con != null ) {
+		if ( pConnection != null ) {
 			
 			String sql = "SELECT matrikelnummer,name,strasse,hausnummer,plz,stadt FROM sb_bau.tj_student";
-			PreparedStatement stmt = con.prepareStatement( sql );
+			PreparedStatement stmt = pConnection.prepareStatement( sql );
 			
 			ResultSet rs = stmt.executeQuery();
 			
@@ -101,10 +129,8 @@ public class StudentController {
 			rs.close();
 			stmt.close();
 			
-			con.close();	
 		}
-		
-		
+				
 		return retList;
 		
 	}

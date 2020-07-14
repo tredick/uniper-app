@@ -9,7 +9,7 @@ public class Student extends Person {
 
 	/**
 	 * Constructor to set all fields-
-	 * @param pName Name of the Studen
+	 * @param pName Name of the Student
 	 * @param pStrasse Street of the location where Student lives
 	 * @param pHausnummer Number in the street
 	 * @param pPlz postal code
@@ -36,13 +36,16 @@ public class Student extends Person {
 	public void setMatrikelNummer(String matrikelNummer) {
 		myMatrikelNummer = matrikelNummer;
 	}
-	
-	
+
+
+
+
+	@Override
 	public String toString() {
-		
-		return super.toString() + "matr.nr. :"+myMatrikelNummer+"\r\n";
-		
+		return super.toString()+",myMatrikelNummer=" + myMatrikelNummer;
 	}
+	
+	
 	
 }
 
